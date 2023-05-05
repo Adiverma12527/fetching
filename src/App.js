@@ -1,61 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
-import { SecondProblem } from './usereffs';
 import { useState } from 'react';
-import { useEffect } from 'react';
-
+import './App.css';
+import axios from "axios";
 
 function App() {
-  //const [count , setCount] = useState(0)
-  //const [windowSize , setWindowSize] = useState('') 
-
+ const [mobileNumber,setMobileNumber] =useState()
   
-  
-  // const [isValue , setIsValue] = useState(true)
-
-  //  const [isDataFinised ,setIsDataFinished] = useState(false)
-
-  // useEffect(()=> {
-  //   setCount(count+1)
-  // },[isValue])
-
-
-  //  useState .
-  // useRef and useEffet .
-
-  // useEffet  used to perform side effect (functionality that you need to perform along with rendering your components) in functional components .
-  //  useEffetcs -/> function (where u write what to perform ) , array / optional .
-
-
-  //  1.of array is not used -/> inifinilty call
-  //  2. empty array -/> one time 
-  //  3. array with dependency -/> 
-
-
-  // function handleCLICK () {
-  //   setIsValue(!isValue)
-  //   console.log({isValue})
- 
-  // }
-
-
-
-  // useEffect (()=> {
-  //   function getWindowSize () {
-  //     setWindowSize(`window size is ${window.innerWidth} * ${window.innerHeight}`)
-  //   }
-  //   window.addEventListener('resize',getWindowSize)
-
-  // },[])
-
-
-
-
-
-
-   return (
-    <div className="App">
-   <SecondProblem/>
+ function handle(){
+  if(mobileNumber < 999967896 || mobileNumber >= 56567890342){
+    alert ("Invalid mobile number")
+    console.error("invalid number")
+    return;
+  }
+  axios.post('https://cdn-api.co-vin.in/api/v2/auth/public/generateOTP', {
+    mobile:mobileNumber
+  })
+  .then(function (response) {
+    setMobileNumber('');
+    alert('Successfully delivered the otp!!!');    
+    console.log(response);
+  })
+  .catch(function (error) {
+    alert('Please retry, something went wrong!!!');
+    console.log(error);
+  });
+      }
+  return (
+    <div className='App'>
+      <form
+      onSubmit={e=> e.preventDefault()}
+      noValidate
+      autoComplete='off'
+      
+      >
+        <input type="number" placeholder='mobile number' 
+        validation={{
+          required:{
+            value:"true",
+            message:"required",
+          },
+          minLength:{
+            value:10,
+            message: "min 10 character",
+          },
+          maxLength:{
+            value:10,
+            message:"min 10 character",
+          }
+        }}
+        onChange={e=>setMobileNumber(e.target.value)}
+        value={mobileNumber}
+        ></input>
+      </form>
+      <button type="sumit" onClick={handle}>Get otp</button>
     </div>
   );
 }
