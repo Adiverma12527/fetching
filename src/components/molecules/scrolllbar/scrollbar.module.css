@@ -1,0 +1,39 @@
+.wrapper{
+    width: 70% ;
+    margin: auto;
+    padding: 2rem ;
+    max-width: 70%;
+    /* gap: 2rem; */
+    /* overflow: hidden; */
+    display: flex;
+    overflow:scroll;
+     /* vh vw */
+}
+.wrapper{
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+
+
+.card{
+    height: 300px;
+    min-height: 200px;
+    background-color:aliceblue;
+    min-width: 200px;
+    border-radius: 12px;
+    margin-right: 2rem;
+    border: 5px solid aliceblue;
+}
+.rolex{
+    border-radius: 100%;
+    border:2px solid white;
+    height: 50%;
+    width:50%;
+    margin-top: 20px;
+   
+}
+
+.paragraph{ 
+    color: blue;
+}
